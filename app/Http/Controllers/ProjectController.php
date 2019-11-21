@@ -14,7 +14,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = auth()->users()->projects;
         return view('projects.index',compact('projects'));
     }
 
@@ -43,8 +43,9 @@ class ProjectController extends Controller
             'description' => 'required',
              
             ]);
-        $attributes['owner_id'] = auth()->id();
-        Project::create($attributes);
+      
+        auth()->user()->projects()->create($attributes);
+      
 
         return redirect('/projects');
     }
