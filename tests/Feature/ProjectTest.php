@@ -16,7 +16,7 @@ class ProjectTest extends TestCase
 
     public function a_user_can_create_a_project()
     {
-        $this->withExceptionHandling();
+        $this->withoutExceptionHandling();
 
         $attributes = [
             'title' => $this->faker->sentence,
@@ -25,6 +25,10 @@ class ProjectTest extends TestCase
         ];
         $this->post('/projects',$attributes);
 
+
+
         $this->assertDatabaseHas('projects',$attributes);
+
+        $this->get('/projects')->assertSee($attributes['title']);
     }
 }
