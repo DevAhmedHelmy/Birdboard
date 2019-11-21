@@ -14,7 +14,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::all();
+        return view('projects.index',compact('projects'));
     }
 
     /**
@@ -40,7 +41,7 @@ class ProjectController extends Controller
             'description' => $request->description
         ]);
 
-        return redirect('/project');
+        return redirect('/projects');
     }
 
     /**
