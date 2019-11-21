@@ -74,4 +74,14 @@ class ProjectTest extends TestCase
                ->assertSee($project->title)
                ->assertSee($project->description);
       }
+
+      /**
+     * @test
+     */
+     public function a_project_requires_an_owner()
+     {
+        $attributes = factory('App\Project')->raw();
+         $this->post('/projects',[])->assertSessionHasErrors('owner');
+     }
+
 }

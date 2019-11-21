@@ -8,11 +8,14 @@
 </head>
 <body>
     <ul>
-        @foreach ($projects as $project)
+        @forelse ($projects as $project)
             <li>
                 <a href="{{$project->path()}}">{{$project->title}}</a>
             </li>  
-        @endforeach
+
+            @empty
+            <li>No Projects Yet.</li>
+        @endforelse
     </ul>
 </body>
 </html>
