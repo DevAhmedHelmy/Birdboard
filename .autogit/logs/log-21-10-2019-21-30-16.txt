@@ -1,0 +1,18 @@
+-------------------- Auto-Git Log --------------------
+		Thu Nov 21 2019 21:30:16 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* app/Http/Controllers/ProjectController.php
+* database/factories/ProjectFactory.php
+* tests/Feature/ProjectTest.php
+
+
+Created files:
+* .autogit/logs/log-21-10-2019-21-0-9.txt
+
+
+Deleted files:
+
+
+Renamed files:

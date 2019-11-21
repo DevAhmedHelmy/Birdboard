@@ -7,12 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <ul>
-        @foreach ($projects as $project)
-            <li>
-                <a href="{{$project->path()}}">{{$project->title}}</a>
-            </li>  
-        @endforeach
-    </ul>
+    {{$project->title}}
+
+
+    {{$project->description}}
 </body>
 </html>
