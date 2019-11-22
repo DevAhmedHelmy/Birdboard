@@ -20,6 +20,7 @@ class ManageProjectTest extends TestCase
         
        $project = factory('App\Project')->create();
        $this->get('/projects')->assertRedirect('login');
+       $this->get('/projects/create')->assertRedirect('login');
        $this->get($project->path())->assertRedirect('login');
         $this->post('/projects',$attributes)->assertRedirect('login');
         
@@ -49,8 +50,11 @@ class ManageProjectTest extends TestCase
     */
     public function a_user_can_create_a_project()
     {
-        // $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         $this->actingAs(factory('App\User')->create());
+
+        $this->get('/projects/create')->assertStatus(200);
+
         $attributes = [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph
