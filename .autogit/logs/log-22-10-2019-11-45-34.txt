@@ -1,0 +1,20 @@
+-------------------- Auto-Git Log --------------------
+		Fri Nov 22 2019 11:45:34 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* .gitignore
+* resources/views/projects/create.blade.php
+* resources/views/projects/index.blade.php
+
+
+Created files:
+* .autogit/logs/log-22-10-2019-11-15-25.txt
+* nbproject/project.properties
+* nbproject/project.xml
+
+
+Deleted files:
+
+
+Renamed files:
