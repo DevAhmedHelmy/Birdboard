@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
     <div class="flex items-center mb-3">
-        <h1 class="mr-auto">Birdboard</h1>
+  
         <a href="/projects/create" class="button is-info">Create a New Project</a>
     </div>
     
