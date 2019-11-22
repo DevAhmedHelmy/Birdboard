@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ProjectTest extends TestCase
+class ManageProjectTest extends TestCase
 {
 
     use WithFaker, RefreshDatabase;
@@ -14,31 +14,36 @@ class ProjectTest extends TestCase
      /**
      * @test
      */
-    public function only_authenticated_users_can_create_project()
+    public function only_authenticated_users_cannot_control_projects()
     {
        // $this->withoutExceptionHandling();
-       $attributes = factory('App\Project')->raw();
+        
+       $project = factory('App\Project')->create();
+       $this->get('/projects')->assertRedirect('login');
+       $this->get($project->path())->assertRedirect('login');
         $this->post('/projects',$attributes)->assertRedirect('login');
+        
+        
     }
      /**
      * @test
      */
-    public function only_authenticated_users_can_view_projects()
-    {
+    // public function only_authenticated_users_can_view_projects()
+    // {
         
-        $this->get('/projects')->assertRedirect('login');
-    }
+    //     $this->get('/projects')->assertRedirect('login');
+    // }
 
     /**
      * @test
      */
-    public function only_authenticated_users_can_view_a_single_project()
-    {
-        // $this->withoutExceptionHandling();
-          $project = factory('App\Project')->create();
+    // public function only_authenticated_users_can_view_a_single_project()
+    // {
+    //     // $this->withoutExceptionHandling();
+    //       $project = factory('App\Project')->create();
           
-        $this->get($project->path())->assertRedirect('login');
-    }
+    //     $this->get($project->path())->assertRedirect('login');
+    // }
    /**
     * @test
     */
@@ -107,13 +112,11 @@ class ProjectTest extends TestCase
 
       public function only_authenticated_users_cannot_view_the_projects_of_others()
       {
-          $this->be(factory('App\User')->create());
-        $this->withoutExceptionHandling();
-          $project = factory('App\Project')->create(['owner_id'=>auth()->id()]);
+            $this->be(factory('App\User')->create());
+            // $this->withoutExceptionHandling();
+            $project = factory('App\Project')->create();
           
-          $this->get($project->path())
-               ->assertSee($project->title)
-               ->assertSee($project->description);
+            $this->get($project->path())->assertStatus(403);
       }
 
      

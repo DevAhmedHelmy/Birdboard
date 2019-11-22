@@ -10,7 +10,7 @@ class Project extends Model
         return "/projects/$this->id";
     }
 
-    public function user()
+    public function owner()
     {
         return $this->belongsTo('App\User');
     }
