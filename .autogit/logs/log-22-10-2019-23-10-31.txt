@@ -1,14 +1,17 @@
 -------------------- Auto-Git Log --------------------
-		Fri Nov 22 2019 13:46:07 GMT+0200 (Eastern European Standard Time)
+		Fri Nov 22 2019 23:10:31 GMT+0200 (Eastern European Standard Time)
 ------------------------------------------------------
 
 Modified files:
+* public/css/app.css
+* resources/sass/app.scss
+* resources/views/layouts/app.blade.php
 * resources/views/projects/index.blade.php
-* resources/views/projects/show.blade.php
 
 
 Created files:
-* .autogit/logs/log-22-10-2019-13-15-54.txt
+* .autogit/logs/log-22-10-2019-16-28-35.txt
+* tailwind.config.js
 
 
 Deleted files:
