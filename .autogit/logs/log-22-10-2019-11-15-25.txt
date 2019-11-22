@@ -1,0 +1,22 @@
+-------------------- Auto-Git Log --------------------
+		Fri Nov 22 2019 11:15:25 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* resources/views/layouts/app.blade.php
+* resources/views/projects/create.blade.php
+* resources/views/projects/index.blade.php
+* resources/views/projects/show.blade.php
+
+
+Created files:
+* .autogit/logs/log-22-10-2019-10-45-7.txt
+* public/css/bulma.css
+* public/css/bulma.css.map
+* public/css/bulma.min.css
+
+
+Deleted files:
+
+
+Renamed files:

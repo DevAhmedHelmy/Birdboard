@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <title>Document</title>
-</head>
-<body>
-    <form action="{{url('/projects')}}" method="post" class="container" style="padding-top:40px;">
+@extends('layouts.app')
+@section('content')
+    <form action="{{url('/projects')}}" method="post">
         @csrf
         <h1 class="heading is-1">Create a Project</h1>
         <div class="field">
@@ -24,9 +16,9 @@
         <div class="field">
             <div class="control">
                     <button type="submit" class="button is-info">Create Project</button>
+                    <a href="/projects" class="button is-danger">Cancel</a>
             </div>
         </div>
         
     </form>
-</body>
-</html>
+@endsection
