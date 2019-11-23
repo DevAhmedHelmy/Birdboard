@@ -12,7 +12,7 @@
             <div class="bg-white p-5 rounded shadow">
             
                 <h3 class="font-normal text-xl py-6"><a href="{{$project->path()}}">{{$project->title}}</a></h3>
-                <div class="text-grey">{{str_limit($project->description)}}</div>
+                <div class="grey">{{str_limit($project->description)}}</div>
                     
             </div>
         </div>
