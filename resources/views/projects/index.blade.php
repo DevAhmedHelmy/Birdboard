@@ -6,14 +6,17 @@
     </div>
     
 
-    <div class="flex">
+    <div class="flex flex-wrap -mx-3">
         @forelse($projects as $project)
-        <div class="bg-white mr-4 p-5 rounded shadow w-1/3">
-             
-            <h3 class="font-normal text-xl py-6"><a href="{{$project->path()}}">{{$project->title}}</a></h3>
-            <div class="text-grey">{{str_limit($project->description)}}</div>
-             
+        <div class="w-1/3 px-4 pb-6">
+            <div class="bg-white p-5 rounded shadow">
+            
+                <h3 class="font-normal text-xl py-6"><a href="{{$project->path()}}">{{$project->title}}</a></h3>
+                <div class="text-grey">{{str_limit($project->description)}}</div>
+                    
+            </div>
         </div>
+        
             
             @empty
         <div>No Projects Yet.</div>
