@@ -10,3 +10,8 @@
 @tailwind components;
 
 @tailwind utilities;
+
+
+.card{
+    @apply .bg-white .p-5 .rounded .shadow;
+}
