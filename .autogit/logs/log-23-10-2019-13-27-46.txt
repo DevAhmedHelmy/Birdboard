@@ -1,0 +1,21 @@
+-------------------- Auto-Git Log --------------------
+		Sat Nov 23 2019 13:27:46 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* public/js/app.js
+* resources/views/layouts/app.blade.php
+* resources/views/projects/index.blade.php
+* webpack.mix.js
+
+
+Created files:
+* .autogit/logs/log-23-10-2019-12-57-31.txt
+* tailwind.js
+
+
+Deleted files:
+* tailwind.config.js
+
+
+Renamed files:
