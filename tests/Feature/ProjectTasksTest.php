@@ -25,6 +25,19 @@ class ProjectTasksTest extends TestCase
 			->assertSee('ahmed tasks');
 	}
 
+	/** @test */
+
+	public function a_task_can_be_updated()
+	{
+		$this->withoutExceptionHandling();
+
+		//  login
+		$this->siginIn();
+		$project = auth()->user()->projects()->create(factory(Project::class)->raw());
+		$task = $project->addTask('test task');
+		$this->patch($project->path(). '\/tasks/' . $task->id);
+	}
+
 	/**
 	 * @test
 	 */

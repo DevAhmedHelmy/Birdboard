@@ -5,6 +5,7 @@
             <p class="text-gray-500 no-underline">
                 <a href="/projects"> My Projects </a> / {{$project->title}}
             </p>
+            
             <a href="/projects/create" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Project</a>
         </div>
         
@@ -15,15 +16,23 @@
                 <div class="mb-8">
                     <h2 class="text-lg text-gray-500 no-underline mb-3">Tasks</h2>
                     {{-- tasks --}}
-                    @forelse ($project->tasks as $task)
-                        <div class="card mb-2">{{$task->body}}</div>
-                    @empty
-                        <div class="card mb-2">No Tasks</div>
-                    @endforelse
+                    @foreach ($project->tasks as $task)
+                        <div class="card mb-2">
+                            <form action="{{$project->path()."/tasks/" . $task->id}}" method="post">
+                                @method('PATCH')
+                                @csrf
+                                <div class="flex">
+                                    <input name="body" value="{{$task->body}}" class="w-full">
+                                    <input type="checkbox" name="completed" onclick="this.form.submit()">
+                                </div>
+                                
+                            </form>
+                        </div>
+                    @endforeach
                     <div class="card mb-2">
                         <form action="{{$project->path().'/tasks'}}" method="post">
                             @csrf   
-                            <input placeholder="Begin Adding Tasks...." name="body" class="w-full" autocomplete="off">
+                            <input placeholder="Add a New Task...." name="body" class="w-full" autocomplete="off">
                         
                         </form>
                     </div>

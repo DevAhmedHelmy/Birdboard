@@ -1,0 +1,18 @@
+-------------------- Auto-Git Log --------------------
+		Fri Nov 29 2019 23:12:17 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* app/Http/Controllers/ProjectTasksController.php
+* resources/views/projects/show.blade.php
+* tests/Feature/ProjectTasksTest.php
+
+
+Created files:
+* .autogit/logs/log-29-10-2019-22-42-10.txt
+
+
+Deleted files:
+
+
+Renamed files:
