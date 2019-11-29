@@ -25,13 +25,33 @@ class ProjectTasksTest extends TestCase
 			->assertSee('ahmed tasks');
 	}
 
-	public function a_project_requires_a_description()
+	/**
+	 * @test
+	 */
+	public function only_the_owner_of_a_project_may_add_tasks()
+	{
+		$this->signIn();
+
+		$project = auth()->user()->projects()->create(
+			factory(Project::class)->raw()
+		);
+		$this->post($project->path() . '/task', ['body' => 'Ahmed Helmy']);
+
+		$this->get($project->path())
+			->assertSee('Ahmed Helmy');
+
+	}
+
+	/**
+	 * @test
+	 */
+	public function a_project_requires_a_body()
 	{
 		
 		$this->siginIn();
 		$project = auth()->user()->projects()->create(factory(Project::class)->raw());
 		$attributes = factory('App\Task')->raw(['body' => '']);
-		$this->post('/projects',[])->assertSessionHasErrors('body');
+		$this->post($project->path() . '/tasks',$attributes)->assertSessionHasErrors('body');
 	}
 
 
