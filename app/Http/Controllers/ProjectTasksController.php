@@ -9,11 +9,14 @@ class ProjectTasksController extends Controller
 {
     public function store(Project $project)
     {
+        if(auth()->user()->isNot($project->owner)){
+            abort(403);
+        }
         $attributes = request()->validate([
             'body' => 'required', 
             ]);
 
-        $project->addTask($attributes);
+        $project->addTask(request('body'));
         
         return redirect($project->path());
     }
