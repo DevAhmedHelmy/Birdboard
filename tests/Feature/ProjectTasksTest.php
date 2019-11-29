@@ -13,7 +13,7 @@ class ProjectTasksTest extends TestCase
  
 	public function test_it_project_can_have_tasks()
 	{
-		$this->withoutExceptionHandling();
+		// $this->withoutExceptionHandling();
 
 		//  login
 		$this->siginIn();
@@ -35,7 +35,14 @@ class ProjectTasksTest extends TestCase
 		$this->siginIn();
 		$project = auth()->user()->projects()->create(factory(Project::class)->raw());
 		$task = $project->addTask('test task');
-		$this->patch($project->path(). '\/tasks/' . $task->id);
+		$this->patch($project->path() . '\/tasks/' . $task->id, [
+			'body' => 'chanaged',
+			'completed' => true
+		]);
+		$this->assertDatabaseHas('tasks',[
+			'body' => 'chanaged',
+			'completed' => true
+		]);
 	}
 
 	/**
@@ -63,6 +70,22 @@ class ProjectTasksTest extends TestCase
 		$project = auth()->user()->projects()->create(factory(Project::class)->raw());
 		$attributes = factory('App\Task')->raw(['body' => '']);
 		$this->post($project->path() . '/tasks',$attributes)->assertSessionHasErrors('body');
+	}
+
+	/**
+	 * @test
+	 */
+	public function only_the_owner_of_a_project_may_update_a_task()
+	{
+		$this->siginIn();
+
+		$project = factory(Project::class)->create();
+		$task = $project->addTask('test task');
+
+		$this->patch($project->path() . '\/tasks/' . $task->id, ['body' => 'chanaged' , 'completed' => true ])->assertStatus(403);
+
+		$this->assertDatabaseMissing('tasks',['body' => 'chanaged' , 'completed' => true ]);
+
 	}
 
 

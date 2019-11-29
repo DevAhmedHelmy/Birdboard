@@ -22,8 +22,8 @@
                                 @method('PATCH')
                                 @csrf
                                 <div class="flex">
-                                    <input name="body" value="{{$task->body}}" class="w-full">
-                                    <input type="checkbox" name="completed" onclick="this.form.submit()">
+                                    <input name="body" value="{{$task->body}}" class="w-full {{$task->completed ? 'text-gray-600' : ''}}">
+                                    <input type="checkbox" name="completed" onclick="this.form.submit()" {{$task->completed ? 'checked' : ''}}>
                                 </div>
                                 
                             </form>
