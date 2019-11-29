@@ -14,15 +14,17 @@ class Project extends Model
     {
         return $this->belongsTo('App\User');
     }
-    public function tasks()
-    {
-        return $this->hasMany('App\Task');
-    }
+    
     
     // to create tasks
     public function addTask($body)
     {
-        $this->tasks()->create(compact('body'));
+        return $this->tasks()->create(['body'=>$body]);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany('App\Task');
     }
 
 
