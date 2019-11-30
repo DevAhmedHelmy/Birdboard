@@ -62,7 +62,7 @@ class ManageProjectTest extends TestCase
 
         $attributes = [
             'title' => $this->faker->sentence,
-            'description' => $this->faker->paragraph,
+            'description' => $this->faker->sentence,
             'notes' => 'General Notes'
 
         ];
@@ -83,6 +83,21 @@ class ManageProjectTest extends TestCase
              ->assertSee($attributes['notes']);
     }
 
+    /** @test */
+    public function a_user_can_update_a_project()
+    {
+        $this->siginIn();
+        $this->withoutExceptionHandling();
+        $project = factory('App\Project')->create(['owner_id'=>auth()->id(),'notes'=>'hello']);
+
+        $this->patch($project->path(),[
+            'notes' => 'changed'
+        ])->assertRedirect($project->path());
+
+        $this->assertDatabaseHas('projects',[
+            'notes' => 'changed'
+        ]);
+    }
     /**
      * @test
      */

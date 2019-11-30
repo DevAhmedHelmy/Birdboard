@@ -85,7 +85,18 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        if(auth()->user()->isNot($project->owner))
+        {
+            abort(403);
+        }
+        request()->validate([
+            'notes' => 'max:255'
+            ]);
+            // dd($attributes);
+          $project->update(['notes' => request('notes')]);
+      
+
+        return redirect($project->path());
     }
 
     /**

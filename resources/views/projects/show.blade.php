@@ -42,7 +42,12 @@
                 {{-- general notes --}}
                 <div>
                     <h2 class="text-lg text-gray-500 no-underline mb-3">General Notes</h2>
-                <textarea class="card w-full" style="min-height:200px">{{$project->notes}}</textarea>
+                    <form method="POST" action="{{$project->path()}}"> 
+                        @method('PATCH')
+                        @csrf
+                        <textarea class="card w-full" name="notes" style="min-height:200px">{{$project->notes}}</textarea>
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Save</button>
+                    </form>
                 </div>
 
                 
@@ -58,7 +63,7 @@
          
     
         <div>
-            <a href="/projects" class="button is-info">Go Back</a>
+            <a href="/projects" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Go Back</a>
         </div>
     </main>
     
