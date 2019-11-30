@@ -35,7 +35,7 @@ class ProjectTasksTest extends TestCase
 		$this->siginIn();
 		$project = auth()->user()->projects()->create(factory(Project::class)->raw());
 		$task = $project->addTask('test task');
-		$this->patch($project->path() . '\/tasks/' . $task->id, [
+		$this->patch($task->path(), [
 			'body' => 'chanaged',
 			'completed' => true
 		]);

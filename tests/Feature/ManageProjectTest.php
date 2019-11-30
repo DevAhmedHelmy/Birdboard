@@ -66,7 +66,10 @@ class ManageProjectTest extends TestCase
 
         ];
         // to route post
-        $this->post('/projects',$attributes)->assertRedirect('/projects');
+        $response = $this->post('/projects',$attributes);
+        
+        $project = \App\Project::where($attributes)->first();
+        $response->assertRedirect($project->path());
 
 
 
