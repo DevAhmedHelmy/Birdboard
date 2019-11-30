@@ -98,6 +98,19 @@ class ManageProjectTest extends TestCase
             'notes' => 'changed'
         ]);
     }
+
+    /**
+      * @test
+      */
+
+      public function only_authenticated_users_cannot_update_the_projects_of_others()
+      {
+            $this->siginIn();
+            // $this->withoutExceptionHandling();
+            $project = factory('App\Project')->create();
+          
+            $this->patch($project->path(),[])->assertStatus(403);
+      }
     /**
      * @test
      */
