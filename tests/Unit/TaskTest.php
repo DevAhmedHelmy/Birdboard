@@ -15,6 +15,6 @@ class TaskTest extends TestCase
     {
 
         $task = factory(\App\Task::class)->create();
-        $this->assertEquals('/projects/'. $task->project->id . '\/tasks/' . $task->id, $task->path());
+        $this->assertEquals('/tasks/' . $task->id, $task->path());
     }
 }
