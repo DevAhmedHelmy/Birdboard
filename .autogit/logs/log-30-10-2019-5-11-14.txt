@@ -1,0 +1,17 @@
+-------------------- Auto-Git Log --------------------
+		Sat Nov 30 2019 05:11:14 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* tests/Feature/ManageProjectTest.php
+* tests/Feature/ProjectTasksTest.php
+
+
+Created files:
+* .autogit/logs/log-30-10-2019-0-42-38.txt
+
+
+Deleted files:
+
+
+Renamed files:
