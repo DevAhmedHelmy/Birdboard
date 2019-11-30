@@ -41,9 +41,9 @@ class ProjectController extends Controller
         $attributes = request()->validate([
             'title' => 'required', 
             'description' => 'required',
-             
+            'notes' => 'max:255'
             ]);
-      
+            // dd($attributes);
           $project = auth()->user()->projects()->create($attributes);
       
 

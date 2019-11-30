@@ -1,0 +1,20 @@
+-------------------- Auto-Git Log --------------------
+		Sat Nov 30 2019 13:08:47 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* app/Http/Controllers/ProjectTasksController.php
+* app/Task.php
+* app/User.php
+* routes/web.php
+* tests/Unit/TaskTest.php
+
+
+Created files:
+* .autogit/logs/log-30-10-2019-12-38-26.txt
+
+
+Deleted files:
+
+
+Renamed files:
