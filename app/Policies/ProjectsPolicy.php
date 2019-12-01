@@ -13,9 +13,10 @@ class ProjectsPolicy
  
     public function update(User $user , Project $project)
     {
-        if($user->is($project->owner))
-        {
-            abort(403);
-        }
+        return $user->id == $project->owner->id;
+        // if(! $user->isNot($project->owner))
+        // {
+        //     abort(403);
+        // }
     }
 }

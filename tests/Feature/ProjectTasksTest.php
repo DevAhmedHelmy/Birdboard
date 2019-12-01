@@ -4,7 +4,7 @@ namespace Tests\Feature;
 
 use App\Project;
 use Tests\TestCase;
-use Tests\Setup\ProjectFactory;
+use Facades\Tests\Setup\ProjectFactory;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -32,12 +32,15 @@ class ProjectTasksTest extends TestCase
 	{
 		$this->withoutExceptionHandling();
 
-		$project = app(ProjectFactory::class)->ownerBy($this->siginIn())->withTasks(1)->create();
+		$project = ProjectFactory::withTasks(1)->create();
 
 		//  login
 		// $this->siginIn();
 		 
-		$this->patch($project->tasks[0]->path(), [
+		$this->actingAs($project->owner)
+			 ->patch($project->tasks[0]
+			 ->path(), 
+			 [
 			'body' => 'chanaged',
 			'completed' => true
 		]);
@@ -82,9 +85,7 @@ class ProjectTasksTest extends TestCase
 		$this->withoutExceptionHandling();
 		$this->siginIn();
 
-		$project = factory(Project::class)->create();
-		
-		$task = $project->addTask('test task');
+		$project = ProjectFactory::withTasks(1)->create();
 		 
 		$this->patch($project->path() . '\/tasks/' . $task->id, ['body' => 'chanaged' , 'completed' => true ])->assertStatus(403);
 
