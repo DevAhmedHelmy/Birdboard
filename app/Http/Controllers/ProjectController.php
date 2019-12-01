@@ -15,6 +15,8 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = auth()->user()->projects;
+        // $projects = $projects->toArray();
+        // dd($projects[0][]);
         return view('projects.index',compact('projects'));
     }
 
@@ -71,7 +73,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -85,11 +87,12 @@ class ProjectController extends Controller
     {
       
         $this->authorize('update',$project);
-        request()->validate([
+        $attributes = request()->validate([
+            'title' => 'required', 
+            'description' => 'required',
             'notes' => 'max:255'
             ]);
-            // dd($attributes);
-          $project->update(['notes' => request('notes')]);
+          $project->update($attributes);
       
 
         return redirect($project->path());
