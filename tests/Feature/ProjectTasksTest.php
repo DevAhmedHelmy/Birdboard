@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Project;
 use Tests\TestCase;
+use Tests\Setup\ProjectFactory;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -29,13 +30,14 @@ class ProjectTasksTest extends TestCase
 
 	public function a_task_can_be_updated()
 	{
-		// $this->withoutExceptionHandling();
+		$this->withoutExceptionHandling();
+
+		$project = app(ProjectFactory::class)->ownerBy($this->siginIn())->withTasks(1)->create();
 
 		//  login
-		$this->siginIn();
-		$project = auth()->user()->projects()->create(factory(Project::class)->raw());
-		$task = $project->addTask('test task');
-		$this->patch($task->path(), [
+		// $this->siginIn();
+		 
+		$this->patch($project->tasks[0]->path(), [
 			'body' => 'chanaged',
 			'completed' => true
 		]);

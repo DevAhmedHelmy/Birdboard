@@ -10,6 +10,8 @@ abstract class TestCase extends BaseTestCase
 
     protected function siginIn($user = null)
     {
-        return $this->actingAs($user ?: factory('App\User')->create());
+        $user = $user ?: factory('App\User')->create();
+        $this->actingAs($user);
+        return $user;
     }
 }
