@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use Facades\Tests\Setup\ProjectFactory;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -23,9 +24,13 @@ class ManageProjectTest extends TestCase
 
         ];
         $project = factory('App\Project')->create();
+
         $this->get('/projects')->assertRedirect('login');
+
         $this->get('/projects/create')->assertRedirect('login');
+
         $this->get($project->path())->assertRedirect('login');
+
         $this->post('/projects',$attributes)->assertRedirect('login');
         
         
@@ -75,7 +80,7 @@ class ManageProjectTest extends TestCase
 
 
 
-        $this->assertDatabaseHas('projects',$attributes);
+        // $this->assertDatabaseHas('projects',$attributes);
 
         $this->get($project->path())
              ->assertSee($attributes['title'])
@@ -86,17 +91,15 @@ class ManageProjectTest extends TestCase
     /** @test */
     public function a_user_can_update_a_project()
     {
-        $this->siginIn();
-        $this->withoutExceptionHandling();
-        $project = factory('App\Project')->create(['owner_id'=>auth()->id(),'notes'=>'hello']);
-
-        $this->patch($project->path(),[
+        // $this->siginIn();
+        // $this->withoutExceptionHandling();
+        // $project = factory('App\Project')->create(['owner_id'=>auth()->id(),'notes'=>'hello']);
+        $project = ProjectFactory::create();
+        $this->actingAs($project->owner)->patch($project->path(),$attributes = [
             'notes' => 'changed'
         ])->assertRedirect($project->path());
 
-        $this->assertDatabaseHas('projects',[
-            'notes' => 'changed'
-        ]);
+        $this->assertDatabaseHas('projects', $attributes);
     }
 
     /**
@@ -144,13 +147,12 @@ class ManageProjectTest extends TestCase
 
       public function a_user_can_view_a_project()
       {
-            $this->siginIn();
-            $this->withoutExceptionHandling();
-            $project = factory('App\Project')->create(['owner_id'=>auth()->id()]);
-          
-            $this->get($project->path())
-                ->assertSee($project->title)
-                ->assertSee($project->description);
+        
+            $project = ProjectFactory::create();
+            $this->actingAs($project->owner)
+                 ->get($project->path())
+                 ->assertSee($project->title)
+                 ->assertSee($project->description);
       }
 
       /**

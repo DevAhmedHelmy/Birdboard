@@ -17,10 +17,12 @@ class ProjectTasksTest extends TestCase
 		// $this->withoutExceptionHandling();
 
 		//  login
-		$this->siginIn();
+		// $this->siginIn();
 
-		$project = auth()->user()->projects()->create(factory(Project::class)->raw());
-		$this->post($project->path(). '/tasks',['body'=>'ahmed tasks']);
+		// $project = auth()->user()->projects()->create(factory(Project::class)->raw());
+		$project = ProjectFactory::create();
+		$this->actingAs($project->owner)
+			 ->post($project->path(). '/tasks',['body'=>'ahmed tasks']);
 
 		$this->get($project->path())
 			->assertSee('ahmed tasks');
@@ -34,8 +36,7 @@ class ProjectTasksTest extends TestCase
 
 		$project = ProjectFactory::withTasks(1)->create();
 
-		//  login
-		// $this->siginIn();
+		 
 		 
 		$this->actingAs($project->owner)
 			 ->patch($project->tasks[0]
@@ -70,11 +71,12 @@ class ProjectTasksTest extends TestCase
 	 */
 	public function a_project_requires_a_body()
 	{
-		$this->withoutExceptionHandling();
-		$this->siginIn();
-		$project = auth()->user()->projects()->create(factory(Project::class)->raw());
+		 
+		 
+		$project = ProjectFactory::create();
+		// $project = auth()->user()->projects()->create(factory(Project::class)->raw());
 		$attributes = factory('App\Task')->raw(['body' => '']);
-		$this->post($project->path() . '/tasks',$attributes)->assertSessionHasErrors('body');
+		$this->actingAs($project->owner)->post($project->path() . '/tasks',$attributes)->assertSessionHasErrors('body');
 	}
 
 	/**
@@ -82,12 +84,12 @@ class ProjectTasksTest extends TestCase
 	 */
 	public function only_the_owner_of_a_project_may_update_a_task()
 	{
-		$this->withoutExceptionHandling();
+		 
 		$this->siginIn();
 
 		$project = ProjectFactory::withTasks(1)->create();
 		 
-		$this->patch($project->path() . '\/tasks/' . $task->id, ['body' => 'chanaged' , 'completed' => true ])->assertStatus(403);
+		$this->patch($project->tasks[0]->path(), ['body' => 'chanaged' , 'completed' => true ])->assertStatus(403);
 
 		$this->assertDatabaseMissing('tasks',['body' => 'chanaged' , 'completed' => true ]);
 
