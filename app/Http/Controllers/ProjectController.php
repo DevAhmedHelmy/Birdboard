@@ -39,14 +39,7 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         
-
-        $attributes = request()->validate([
-            'title' => 'required', 
-            'description' => 'required',
-            'notes' => 'max:255'
-            ]);
-            // dd($attributes);
-          $project = auth()->user()->projects()->create($attributes);
+        $project = auth()->user()->projects()->create($this->validateRequest());
       
 
         return redirect($project->path());
@@ -87,12 +80,8 @@ class ProjectController extends Controller
     {
       
         $this->authorize('update',$project);
-        $attributes = request()->validate([
-            'title' => 'required', 
-            'description' => 'required',
-            'notes' => 'max:255'
-            ]);
-          $project->update($attributes);
+        
+        $project->update($this->validate());
       
 
         return redirect($project->path());
@@ -107,5 +96,15 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+    }
+
+    public function validateRequest()
+    {
+        return request()->validate([
+            'title' => 'required', 
+            'description' => 'required',
+            'notes' => 'max:255'
+            ]);
+          
     }
 }
