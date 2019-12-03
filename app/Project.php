@@ -27,6 +27,11 @@ class Project extends Model
         return $this->hasMany('App\Task');
     }
 
+    public function activity()
+    {
+        return $this->hasMany('App\Activity');
+    }
+
 
 
     
