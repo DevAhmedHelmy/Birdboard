@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Tue Dec 03 2019 23:33:14 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* routes/web.php
+* tests/Feature/ActivityFeedTest.php
+
+
+Created files:
+
+
+Deleted files:
+
+
+Renamed files:

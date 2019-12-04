@@ -19,7 +19,8 @@ class Project extends Model
     // to create tasks
     public function addTask($body)
     {
-        return $this->tasks()->create(['body'=>$body]);
+        $task = $this->tasks()->create(['body'=>$body]);
+        
     }
 
     public function tasks()
