@@ -1,6 +1,8 @@
 <?php
 
 namespace App;
+
+use App\Activity;
  
 
 class Project extends Model
@@ -20,7 +22,8 @@ class Project extends Model
     public function addTask($body)
     {
         $task = $this->tasks()->create(['body'=>$body]);
-        
+        Activity::create(['project_id' => $this->id, 'description' => 'created_task']);
+        return $task;
     }
 
     public function tasks()
@@ -31,6 +34,12 @@ class Project extends Model
     public function activity()
     {
         return $this->hasMany('App\Activity');
+    }
+
+
+    public function recordActivity($type)
+    {
+        Activity::create(['project_id'=>$this->id, 'description' => $type]);
     }
 
 
