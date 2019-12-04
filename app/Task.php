@@ -11,15 +11,7 @@ class Task extends Model
     protected $casts = [
         'completed' => 'boolean'
     ];
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::created(function($task){
-            $task->project->recordActivity('created_task');
-        });
-    }
-        
+       
 
     public function path()
     {
@@ -40,6 +32,14 @@ class Task extends Model
     public function incompleted()
     {
         $this->update(['completed' => false]);
+        $this->project->recordActivity('incompleted_task');
+        
+    }
+
+    public function deleteTask()
+    {
+        $this->delete();
+        $this->project->recordActivity('deleting_task');
         
     }
 

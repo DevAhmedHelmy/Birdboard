@@ -68,7 +68,29 @@ class RecordActivityTest extends TestCase
              'completed' => true
          ]);
          $this->assertCount(3, $project->activity); 
-         $this->assertEquals('completed_task',$project->activity->last()->description);
+         $this->patch($project->tasks[0]->path(),[
+            'body' => 'foobar',
+            'completed' => false
+        ]);
+
+         $this->assertCount(4, $project->fresh()->activity); 
+         $this->assertEquals('incompleted_task',$project->fresh()->activity->last()->description);
      }
+
+     /** @test */ 
+
+     function deleting_a_task()
+     {
+         $this->withoutExceptionHandling();
+         $project = ProjectFactory::withTasks(1)->create();
+
+
+         $project->tasks[0]->delete();
+        
+
+         $this->assertCount(3, $project->fresh()->activity); 
+         $this->assertEquals('deleting_task',$project->fresh()->activity->last()->description);
+     }
+
 
 }

@@ -25,13 +25,16 @@ class ProjectTasksController extends Controller
         $this->authorize('update',$task->project);
         $task->update(['body' => request('body')]);
 
-        $method = request('completed') ? 'completed' : 'inCompleted';
 
-        $task->$method();
-
-       
+        request('completed') ? $task->completed() : $task->inCompleted();
         
         return redirect($task->project->path());
+    }
+
+    public function destroy(Task $task)
+    {
+       
+        $task->delete();
     }
 
 }
