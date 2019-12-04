@@ -24,9 +24,11 @@ class ProjectTasksController extends Controller
     {
         $this->authorize('update',$task->project);
         $task->update(['body' => request('body')]);
-        if(request()->has('completed'))
+        if(request('completed'))
         {
-            $this->completed();
+            $task->completed();
+        }else{
+            $task->inCompleted();
         }
         
         return redirect($task->project->path());

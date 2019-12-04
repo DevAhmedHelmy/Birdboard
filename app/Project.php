@@ -17,12 +17,15 @@ class Project extends Model
         return $this->belongsTo('App\User');
     }
     
-    
+    public function recordActivity($description)
+    {
+        $this->activity()->create(compact('description'));
+    }
     // to create tasks
     public function addTask($body)
     {
         $task = $this->tasks()->create(['body'=>$body]);
-        Activity::create(['project_id' => $this->id, 'description' => 'created_task']);
+        $this->activity()->create(['description' => 'created_task']);
         return $task;
     }
 
@@ -37,10 +40,7 @@ class Project extends Model
     }
 
 
-    public function recordActivity($type)
-    {
-        Activity::create(['project_id'=>$this->id, 'description' => $type]);
-    }
+    
 
 
 

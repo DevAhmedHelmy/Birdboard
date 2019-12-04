@@ -43,6 +43,60 @@ class ProjectTasksTest extends TestCase
 			 ->path(), 
 			 [
 			'body' => 'chanaged',
+			 
+		]);
+		$this->assertDatabaseHas('tasks',[
+			'body' => 'chanaged',
+			 
+		]);
+	}
+
+
+	/** @test */
+
+	public function a_task_can_be_marked_as_incompleted()
+	{
+		$this->withoutExceptionHandling();
+
+		$project = ProjectFactory::withTasks(1)->create();
+
+		 
+		 
+		$this->actingAs($project->owner)
+			 ->patch($project->tasks[0]
+			 ->path(), 
+			 [
+			'body' => 'chanaged',
+			'completed' => true
+		]);
+
+		$this->patch($project->tasks[0]
+			 ->path(), 
+			 [
+			'body' => 'chanaged',
+			'completed' => false
+		]);
+
+		$this->assertDatabaseHas('tasks',[
+			'body' => 'chanaged',
+			'completed' => false
+		]);
+	}
+
+	/** @test */
+
+	public function a_task_can_be_completed()
+	{
+		// $this->withoutExceptionHandling();
+
+		$project = ProjectFactory::withTasks(1)->create();
+
+		 
+		 
+		$this->actingAs($project->owner)
+			 ->patch($project->tasks[0]->path(), 
+			 [
+			'body' => 'chanaged',
 			'completed' => true
 		]);
 		$this->assertDatabaseHas('tasks',[
@@ -50,6 +104,7 @@ class ProjectTasksTest extends TestCase
 			'completed' => true
 		]);
 	}
+
 
 	/**
 	 * @test
