@@ -6,7 +6,7 @@ namespace App;
 
 class Task extends Model
 {
-
+    // use RecordsActivity;
     protected $touches = ['project'];
     protected $casts = [
         'completed' => 'boolean'
@@ -36,11 +36,14 @@ class Task extends Model
         
     }
 
-    public function deleteTask()
+    public function recordActivity($description)
     {
-        $this->delete();
-        $this->project->recordActivity('deleting_task');
-        
+        $this->activity()->create(['description' => $description, 'project_id' => $this->project_id]);
+    }
+
+    public function activity()
+    {
+        return $this->morphMany('App\Activity', 'subject')->latest();
     }
 
     

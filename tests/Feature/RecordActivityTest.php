@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Task;
 use Tests\TestCase;
 use Facades\Tests\Setup\ProjectFactory;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -39,8 +40,12 @@ class RecordActivityTest extends TestCase
         // $this->withoutExceptionHandling();
         $project = ProjectFactory::create();
         $project->addTask('some task');
-        $this->assertCount(3, $project->activity); 
-        $this->assertEquals('created_task',$project->activity->last()->description);
+        $this->assertCount(3, $project->activity);
+        tap($project->activity->last(), function($activity){
+            $this->assertEquals('created_task',$activity->description);
+            $this->assertInstanceOf(Task::class, $activity->subject);
+        }); 
+        
     }
 
      /** @test */ 

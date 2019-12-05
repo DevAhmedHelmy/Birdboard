@@ -53,9 +53,30 @@
                 
             </div>
             
-            <div class="lg:w-1/4 px-3">
+            <div class="lg:w-1/4 px-3 lg:py-8">
                  @include('projects.card')
-             
+                 {{-- @include ('projects.activity.card') --}}
+                <div class="card mt-3">
+                    <ul class="text-xs">
+
+                
+                        @foreach($project->activity as $activity)
+                        <li class="{{$loop->last ? '' : 'mb-1'}}">
+                           @if( $activity->description == 'created_project')
+                               you created Project
+                               
+                           @elseif($activity->description == 'updated_project')
+                               you updated Project
+                           @elseif($activity->description == 'created_task')
+                               you created task
+                           @elseif($activity->description == 'completed_task')
+                               you completed Task
+                           @endif
+                       </li>
+                        @endforeach
+                       </ul>
+                </div>
+                
             </div>
         </div>
     

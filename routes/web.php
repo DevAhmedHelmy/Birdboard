@@ -1,16 +1,6 @@
 <?php
 
-<<<<<<< HEAD
-\App\Project::created(function ($project){
-    \App\Activity::create(['project_id'=>$project->id, 'description' => 'created']);
-});
-\App\Project::updated(function ($project){
-    \App\Activity::create(['project_id'=>$project->id, 'description' => 'updated']);
-});
-
-=======
  
->>>>>>> a0f59c4a9091b594d48a456832c4eb2f8de251bc
 /*
 |--------------------------------------------------------------------------
 | Web Routes
