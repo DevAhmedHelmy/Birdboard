@@ -1,5 +1,6 @@
 <?php
 
+<<<<<<< HEAD
 \App\Project::created(function ($project){
     \App\Activity::create(['project_id'=>$project->id, 'description' => 'created']);
 });
@@ -7,6 +8,9 @@
     \App\Activity::create(['project_id'=>$project->id, 'description' => 'updated']);
 });
 
+=======
+ 
+>>>>>>> a0f59c4a9091b594d48a456832c4eb2f8de251bc
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,4 +42,5 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/projects/{project}/tasks','ProjectTasksController@store');
     Route::patch('/tasks/{task}','ProjectTasksController@update');
+    Route::delete('/tasks/{task}','ProjectTasksController@destroy');
 });

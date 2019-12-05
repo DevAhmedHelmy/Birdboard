@@ -1,0 +1,19 @@
+-------------------- Auto-Git Log --------------------
+		Wed Dec 04 2019 23:13:18 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* app/Http/Controllers/ProjectTasksController.php
+* app/Task.php
+* database/factories/TaskFactory.php
+* tests/Unit/TaskTest.php
+
+
+Created files:
+* .autogit/logs/log-4-11-2019-22-43-10.txt
+
+
+Deleted files:
+
+
+Renamed files:

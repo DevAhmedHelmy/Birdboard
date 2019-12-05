@@ -1,0 +1,20 @@
+-------------------- Auto-Git Log --------------------
+		Wed Dec 04 2019 22:13:03 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* app/Project.php
+* app/Providers/AppServiceProvider.php
+* routes/web.php
+* tests/Feature/ActivityFeedTest.php
+
+
+Created files:
+* .autogit/logs/log-3-11-2019-23-33-14.txt
+* app/Observers/ProjectObserver.php
+
+
+Deleted files:
+
+
+Renamed files:
