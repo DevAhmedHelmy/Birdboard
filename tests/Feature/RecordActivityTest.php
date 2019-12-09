@@ -18,7 +18,14 @@ class RecordActivityTest extends TestCase
         $this->withoutExceptionHandling();
         $project = ProjectFactory::create();
         $this->assertCount(1, $project->activity); 
-        $this->assertEquals('created',$project->activity[0]->description);
+        // $this->assertEquals('created',$project->activity[0]->description);
+
+        tap($project->activity->last(), function($activity){
+          
+            $this->assertEquals('created_project',$activity->description);
+            $this->assertNull($activity->changes);
+             
+        });
     }
 
 
@@ -28,9 +35,22 @@ class RecordActivityTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $project = ProjectFactory::create();
+        $oraginalTitle = $project->title;
         $project->update(['title' => 'chanaged']);
         $this->assertCount(2, $project->activity); 
-        $this->assertEquals('updated',$project->activity->last()->description);
+   
+
+        tap($project->activity->last(), function($activity) use ($oraginalTitle){
+            // dd($activity);
+            $this->assertEquals('updated',$activity->description);
+            $expected = [
+                'before' => ['title' => $oraginalTitle],
+                'after' => ['title'=>'chanaged']
+            ];
+            $this->assertEquals($expected, $activity->changes);
+             
+             
+        });
     }
 
     /** @test */ 
@@ -42,8 +62,10 @@ class RecordActivityTest extends TestCase
         $project->addTask('some task');
         $this->assertCount(3, $project->activity);
         tap($project->activity->last(), function($activity){
+            // dd($activity->toArray());
             $this->assertEquals('created_task',$activity->description);
             $this->assertInstanceOf(Task::class, $activity->subject);
+            $this->assertEquals('some task', $activity->subject->body);
         }); 
         
     }
@@ -59,7 +81,14 @@ class RecordActivityTest extends TestCase
              'completed' => true
          ]);
          $this->assertCount(3, $project->activity); 
-         $this->assertEquals('completed_task',$project->activity->last()->description);
+  
+
+         tap($project->activity->last(), function($activity){
+          
+            $this->assertEquals('completed_task',$activity->description);
+            $this->assertInstanceOf(Task::class, $activity->subject);
+             
+        }); 
      }
 
      /** @test */ 
@@ -79,7 +108,14 @@ class RecordActivityTest extends TestCase
         ]);
 
          $this->assertCount(4, $project->fresh()->activity); 
-         $this->assertEquals('incompleted_task',$project->fresh()->activity->last()->description);
+         
+
+         tap($project->activity->last(), function($activity){
+            $this->assertEquals('incompleted_task',$activity->description);
+            
+            $this->assertInstanceOf(Task::class, $activity->subject);
+            
+        }); 
      }
 
      /** @test */ 

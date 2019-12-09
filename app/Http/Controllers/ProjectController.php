@@ -41,7 +41,7 @@ class ProjectController extends Controller
     {
         
         $project = auth()->user()->projects()->create($this->validateRequest());
-      
+        
 
         return redirect($project->path());
     }
@@ -83,7 +83,7 @@ class ProjectController extends Controller
          
         $request->persist();
         // $project->update($request->validated());
-      
+        
 
         return redirect($request->project()->path());
     }

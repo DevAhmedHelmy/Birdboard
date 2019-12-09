@@ -40,5 +40,6 @@ class UpdateProjectRequest extends FormRequest
     public function persist()
     {
         $this->project()->update($this->validated());
+         
     }
 }

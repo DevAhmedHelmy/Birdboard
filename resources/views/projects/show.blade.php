@@ -55,8 +55,8 @@
             
             <div class="lg:w-1/4 px-3 lg:py-8">
                  @include('projects.card')
-                 {{-- @include ('projects.activity.card') --}}
-                <div class="card mt-3">
+                 @include ('projects.activity.card')
+                {{-- <div class="card mt-3">
                     <ul class="text-xs">
 
                 
@@ -71,11 +71,13 @@
                                you created task
                            @elseif($activity->description == 'completed_task')
                                you completed Task
+                               @elseif($activity->description == 'incompleted_task')
+                               you incompleted Task
                            @endif
                        </li>
                         @endforeach
                        </ul>
-                </div>
+                </div> --}}
                 
             </div>
         </div>

@@ -19,6 +19,11 @@ class ProjectObserver
          
     }
 
+    public function updating(Project $project)
+    {
+        $project->old = $project->getOriginal();
+    }
+
     /**
      * Handle the project "updated" event.
      *
@@ -27,7 +32,7 @@ class ProjectObserver
      */
     public function updated(Project $project)
     {
-        $project->recordActivity('updated_project');
+        $project->recordActivity('updated');
     }
 
     

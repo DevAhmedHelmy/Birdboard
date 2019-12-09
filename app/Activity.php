@@ -6,6 +6,10 @@ namespace App;
 
 class Activity extends Model
 {
+
+    protected $casts = [
+        'changes' => 'array'
+    ];
     /**
      * Get the user who triggered the activity.
      *
@@ -25,5 +29,7 @@ class Activity extends Model
     {
         return $this->morphTo();
     }
+
+     
 
 }
