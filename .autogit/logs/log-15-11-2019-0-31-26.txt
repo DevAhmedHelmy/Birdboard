@@ -1,0 +1,24 @@
+-------------------- Auto-Git Log --------------------
+		Sun Dec 15 2019 00:31:26 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* app/Activity.php
+* app/RecordsActivity.php
+* database/migrations/2019_12_03_042345_create_activities_table.php
+* resources/views/projects/activity/completed_task.blade.php
+* resources/views/projects/activity/created_project.blade.php
+* resources/views/projects/activity/created_task.blade.php
+* resources/views/projects/activity/incompleted_task.blade.php
+* resources/views/projects/activity/updated_project.blade.php
+
+
+Created files:
+* .autogit/logs/log-15-11-2019-0-1-19.txt
+* tests/Unit/ActivityTest.php
+
+
+Deleted files:
+
+
+Renamed files:
