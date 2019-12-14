@@ -42,7 +42,7 @@ class RecordActivityTest extends TestCase
 
         tap($project->activity->last(), function($activity) use ($oraginalTitle){
             // dd($activity);
-            $this->assertEquals('updated',$activity->description);
+            $this->assertEquals('updated_project',$activity->description);
             $expected = [
                 'before' => ['title' => $oraginalTitle],
                 'after' => ['title'=>'chanaged']
@@ -130,7 +130,7 @@ class RecordActivityTest extends TestCase
         
 
          $this->assertCount(3, $project->fresh()->activity); 
-         $this->assertEquals('deleting_task',$project->fresh()->activity->last()->description);
+         $this->assertEquals('deleted_task',$project->fresh()->activity->last()->description);
      }
 
 
