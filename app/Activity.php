@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\User;
+
  
 
 class Activity extends Model
