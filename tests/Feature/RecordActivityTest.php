@@ -38,7 +38,7 @@ class RecordActivityTest extends TestCase
         $oraginalTitle = $project->title;
         $project->update(['title' => 'chanaged']);
         $this->assertCount(2, $project->activity); 
-   
+       
 
         tap($project->activity->last(), function($activity) use ($oraginalTitle){
             // dd($activity);
