@@ -87,6 +87,17 @@ class ManageProjectTest extends TestCase
              ->assertSee($attributes['description'])
              ->assertSee($attributes['notes']);
     }
+     /** @test */
+     public function a_gust_can__not_delete_a_project()
+     {
+        //  $this->withoutExceptionHandling();
+         $project = ProjectFactory::create();
+        $this->delete($project->path())->assertRedirect('/login');
+
+          $this->siginIn();
+
+          $this->delete($project->path())->assertStatus(403);
+     }
 
     /** @test */
     public function a_user_can_delete_a_project()
