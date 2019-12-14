@@ -87,7 +87,7 @@ class RecordActivityTest extends TestCase
           
             $this->assertEquals('completed_task',$activity->description);
             $this->assertInstanceOf(Task::class, $activity->subject);
-             
+              
         }); 
      }
 
