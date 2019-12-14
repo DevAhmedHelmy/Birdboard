@@ -1,0 +1,20 @@
+-------------------- Auto-Git Log --------------------
+		Sat Dec 14 2019 23:01:06 GMT+0200 (Eastern European Standard Time)
+------------------------------------------------------
+
+Modified files:
+* app/Observers/ProjectObserver.php
+* app/Observers/TaskObserver.php
+* app/Project.php
+* app/RecordsActivity.php
+* app/Task.php
+
+
+Created files:
+* .autogit/logs/log-14-11-2019-22-30-59.txt
+
+
+Deleted files:
+
+
+Renamed files:

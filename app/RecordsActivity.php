@@ -27,17 +27,21 @@ trait RecordsActivity
 
     public static function bootRecordsActivity()
     {
-        static::updating(function($model){
-            $model->oldAttributes = $model->getOriginal();
-        });
+        
 
-        $recordableEvents=['created', 'updated', 'deleted'];
-
-        foreach($recordableEvents as $event)
+      
+        foreach(self::recordableEvents() as $event)
         {
             static::$event(function($model) use ($event){
-                $model->recordActivity($event);
+                $model->recordActivity($model->activityDescription($event));
             });
+
+            if($event === 'updated')
+            {
+                static::updating(function($model){
+                    $model->oldAttributes = $model->getOriginal();
+                });
+            }
         }
      
         
@@ -49,22 +53,24 @@ trait RecordsActivity
      * @param  string $description
      * @return string
      */
-    // protected function activityDescription($description)
-    // {
-    //     return "{$description}_" . strtolower(class_basename($this));
-    // }
+    protected function activityDescription($description)
+    {
+        return "{$description}_" . strtolower(class_basename($this));
+    }
     /**
      * Fetch the model events that should trigger activity.
      *
      * @return array
      */
-    // protected static function recordableEvents()
-    // {
-    //     if (isset(static::$recordableEvents)) {
-    //         return static::$recordableEvents;
-    //     }
-    //     return ['created', 'updated'];
-    // }
+    protected static function recordableEvents()
+    {
+        if(isset(static::$recordableEvents)){
+            return static::$recordableEvents;
+        }
+
+        return ['created', 'updated', 'deleted'];
+        
+    }
     /**
      * Record activity for a project.
      *
