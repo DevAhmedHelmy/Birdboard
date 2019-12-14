@@ -11,6 +11,7 @@ class Task extends Model
     protected $casts = [
         'completed' => 'boolean'
     ];
+    
        
 
     public function path()
@@ -38,18 +39,7 @@ class Task extends Model
 
     
 
-    protected function getActivityChanges()
-    {
-        if($this->wasChanged())
-        {
-            return[
-                'before' => array_except(array_diff($this->old , $this->getAttributes()), 'updated_at'),
-                'after' => array_except($this->getChanges(), 'updated_at')
-            ];
-        }
-
-        
-    }
+    
 
     public function activity()
     {

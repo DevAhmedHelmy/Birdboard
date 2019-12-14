@@ -17,7 +17,7 @@ class TaskObserver
         $task->recordActivity('created_task');
     }
 
-    
+     
 
     /**
      * Handle the task "deleted" event.

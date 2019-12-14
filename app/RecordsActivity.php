@@ -3,7 +3,7 @@ namespace App;
 trait RecordsActivity
 {
     /**
-     * The project's old attributes.
+     * The project's oldAttributes attributes.
      *
      * @var array
      */
@@ -11,18 +11,37 @@ trait RecordsActivity
     /**
      * Boot the trait.
      */
+    // public static function bootRecordsActivity()
+    // {
+    //     foreach (self::recordableEvents() as $event) {
+    //         static::$event(function ($model) use ($event) {
+    //             $model->recordActivity($model->activityDescription($event));
+    //         });
+    //         if ($event === 'updated') {
+    //             static::updating(function ($model) {
+    //                 $model->oldAttributes = $model->getOriginal();
+    //             });
+    //         }
+    //     }
+    // }
+
     public static function bootRecordsActivity()
     {
-        foreach (self::recordableEvents() as $event) {
-            static::$event(function ($model) use ($event) {
-                $model->recordActivity($model->activityDescription($event));
+        static::updating(function($model){
+            $model->oldAttributes = $model->getOriginal();
+        });
+
+        $recordableEvents=['created', 'updated', 'deleted'];
+
+        foreach($recordableEvents as $event)
+        {
+            static::$event(function($model) use ($event){
+                $model->recordActivity($event);
             });
-            if ($event === 'updated') {
-                static::updating(function ($model) {
-                    $model->oldAttributes = $model->getOriginal();
-                });
-            }
         }
+     
+        
+     
     }
     /**
      * Get the description of the activity.
@@ -30,22 +49,22 @@ trait RecordsActivity
      * @param  string $description
      * @return string
      */
-    protected function activityDescription($description)
-    {
-        return "{$description}_" . strtolower(class_basename($this));
-    }
+    // protected function activityDescription($description)
+    // {
+    //     return "{$description}_" . strtolower(class_basename($this));
+    // }
     /**
      * Fetch the model events that should trigger activity.
      *
      * @return array
      */
-    protected static function recordableEvents()
-    {
-        if (isset(static::$recordableEvents)) {
-            return static::$recordableEvents;
-        }
-        return ['created', 'updated'];
-    }
+    // protected static function recordableEvents()
+    // {
+    //     if (isset(static::$recordableEvents)) {
+    //         return static::$recordableEvents;
+    //     }
+    //     return ['created', 'updated'];
+    // }
     /**
      * Record activity for a project.
      *
@@ -76,17 +95,16 @@ trait RecordsActivity
      *
      * @return array|null
      */
-    protected function activityChanges()
+    protected function getActivityChanges()
     {
-        if ($this->wasChanged()) {
-            return [
-                'before' => array_except(
-                    array_diff($this->oldAttributes, $this->getAttributes()), 'updated_at'
-                ),
-                'after' => array_except(
-                    $this->getChanges(), 'updated_at'
-                )
+        if($this->wasChanged())
+        {
+            return[
+                'before' => array_except(array_diff($this->oldAttributes , $this->getAttributes()), 'updated_at'),
+                'after' => array_except($this->getChanges(), 'updated_at')
             ];
         }
+
+        
     }
 }
