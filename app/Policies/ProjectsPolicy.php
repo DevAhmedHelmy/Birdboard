@@ -13,7 +13,7 @@ class ProjectsPolicy
  
     public function update(User $user , Project $project)
     {
-        return $user->id == $project->owner->id;
+        return $user->id == $project->owner->id || $project->members->contains($user);
         // if(! $user->isNot($project->owner))
         // {
         //     abort(403);
