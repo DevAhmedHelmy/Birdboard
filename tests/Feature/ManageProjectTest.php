@@ -127,6 +127,20 @@ class ManageProjectTest extends TestCase
     }
 
     /** @test */
+
+    public function a_user_can_see_all_projects_they_have_been_invited()
+    {
+        // $this->withoutExceptionHandling();
+        $user = $this->siginIn();
+        
+        $project = tap(ProjectFactory::create())->invite($user);
+        // $project->invite($user);
+        $this->get('/projects')
+             ->assertSee($project->title);
+
+    }
+
+    /** @test */
     public function a_user_can_update_a_projects_general_notes()
     {
         // $this->siginIn();

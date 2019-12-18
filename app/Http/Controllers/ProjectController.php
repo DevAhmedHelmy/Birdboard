@@ -15,9 +15,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = auth()->user()->projects;
-        // $projects = $projects->toArray();
-        // dd($projects[0][]);
+        $projects = auth()->user()->accessibleProjects();
+       
         return view('projects.index',compact('projects'));
     }
 
