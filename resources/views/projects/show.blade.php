@@ -20,7 +20,7 @@
                     alt="{{ $project->owner->name }}'s avatar"
                     class="rounded-full w-8 mr-2">
 
-                <a href="{{ $project->path().'/edit' }}" class="button ml-4">Edit Project</a>
+                <a href="{{ $project->path().'/edit' }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit Project</a>
             </div>
         </div>
     </header>
@@ -70,7 +70,11 @@
             <div class="lg:w-1/4 px-3 lg:py-8">
                  @include('projects.card')
                  @include ('projects.activity.card')
-          
+
+                 @can('manage')
+                 @include ('projects.invite')
+                 @endcan
+
                 
             </div>
         </div>
