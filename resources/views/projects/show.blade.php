@@ -1,14 +1,28 @@
 @extends('layouts.app')
 @section('content')
-    <header class="flex items-center mb-3 py-4">
+    <header class="flex items-center mb-6 pb-4">
         <div class="flex justify-between items-end w-full">
-            <p class="text-gray-500 no-underline">
-                <a href="/projects"> My Projects </a> / {{$project->title}}
+            <p class="text-muted font-light">
+                <a href="/projects" class="text-muted no-underline hover:underline">My Projects</a>
+                / {{ $project->title }}
             </p>
-            
-            <a href="{{ $project->path().'/edit' }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit Project</a>
+
+            <div class="flex items-center">
+                @foreach ($project->members as $member)
+                    <img
+                        src="{{ gravatar_url($member->email) }}"
+                        alt="{{ $member->name }}'s avatar"
+                        class="rounded-full w-8 mr-2">
+                @endforeach
+
+                <img
+                    src="{{ gravatar_url($project->owner->email) }}"
+                    alt="{{ $project->owner->name }}'s avatar"
+                    class="rounded-full w-8 mr-2">
+
+                <a href="{{ $project->path().'/edit' }}" class="button ml-4">Edit Project</a>
+            </div>
         </div>
-        
     </header>
     <main>
         <div class="lg:flex -mx-3">
@@ -56,28 +70,7 @@
             <div class="lg:w-1/4 px-3 lg:py-8">
                  @include('projects.card')
                  @include ('projects.activity.card')
-                {{-- <div class="card mt-3">
-                    <ul class="text-xs">
-
-                
-                        @foreach($project->activity as $activity)
-                        <li class="{{$loop->last ? '' : 'mb-1'}}">
-                           @if( $activity->description == 'created_project')
-                               you created Project
-                               
-                           @elseif($activity->description == 'updated_project')
-                               you updated Project
-                           @elseif($activity->description == 'created_task')
-                               you created task
-                           @elseif($activity->description == 'completed_task')
-                               you completed Task
-                               @elseif($activity->description == 'incompleted_task')
-                               you incompleted Task
-                           @endif
-                       </li>
-                        @endforeach
-                       </ul>
-                </div> --}}
+          
                 
             </div>
         </div>

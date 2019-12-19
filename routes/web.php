@@ -31,7 +31,10 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::post('/projects','ProjectController@store');
     // Route::delete('/projects/{project}','ProjectController@destroy');
     Route::resource('/projects', 'ProjectController');
+    Route::post('projects/{project}/invitations', 'ProjectInvitationsController@store');
     Route::post('/projects/{project}/tasks','ProjectTasksController@store');
     Route::patch('/tasks/{task}','ProjectTasksController@update');
     Route::delete('/tasks/{task}','ProjectTasksController@destroy');
+
+    
 });
