@@ -20,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
-<body class="theme-light bg-page">
+<body class="bg-inverse">
     <div id="app">
         <nav class="bg-header section">
             <div class="container mx-auto">

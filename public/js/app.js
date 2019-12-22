@@ -49378,8 +49378,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /media/ahmed/5f260234-8395-4b31-b6e5-a16df7deebf6/My Projects/Laravel/Birdbroad/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /media/ahmed/5f260234-8395-4b31-b6e5-a16df7deebf6/My Projects/Laravel/Birdbroad/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /media/ahmed/216e7f24-0bb6-4f60-87e2-6c0007e38179/Ahmed Helmy/sp/Birdboard/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /media/ahmed/216e7f24-0bb6-4f60-87e2-6c0007e38179/Ahmed Helmy/sp/Birdboard/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -65,38 +65,43 @@ class ManageProjectTest extends TestCase
 
         $this->get('/projects/create')->assertStatus(200);
 
-        $attributes = [
-            'title' => $this->faker->sentence,
-            'description' => $this->faker->sentence,
-            'notes' => 'General Notes'
+        // $attributes = [
+        //     'title' => $this->faker->sentence,
+        //     'description' => $this->faker->sentence,
+        //     'notes' => 'General Notes'
 
-        ];
+        // ];
+
+        // $attributes = factory(\App\Project::class)->raw(['owner'=>auth()->id()]);
         // to route post
-        $response = $this->post('/projects',$attributes);
+        // $response = $this->followingRedirects()->post('/projects',$attributes);
         
-        $project = \App\Project::where($attributes)->first();
+        // $project = \App\Project::where($attributes)->first();
         
-        $response->assertRedirect($project->path());
+        // $response->assertRedirect($project->path());
 
 
 
         // $this->assertDatabaseHas('projects',$attributes);
 
-        $this->get($project->path())
+        $this->followingRedirects()
+             ->post('/projects', $attributes = factory(\App\Project::class)->raw(['owner' => auth()->id()]))
              ->assertSee($attributes['title'])
              ->assertSee($attributes['description'])
              ->assertSee($attributes['notes']);
     }
      /** @test */
-     public function a_gust_can__not_delete_a_project()
+     public function a_guest_can__not_delete_a_project()
      {
         //  $this->withoutExceptionHandling();
-         $project = ProjectFactory::create();
+        $project = ProjectFactory::create();
         $this->delete($project->path())->assertRedirect('/login');
 
-          $this->siginIn();
+        $user = $this->siginIn();
 
-          $this->delete($project->path())->assertStatus(403);
+        $this->delete($project->path())->assertStatus(403);
+        $project->invite($user);
+        $this->actingAs($user)->delete($project->path())->assertStatus(403);
      }
 
     /** @test */
